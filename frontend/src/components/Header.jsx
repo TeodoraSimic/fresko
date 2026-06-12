@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg="success" variant="dark" expand="md" collapseOnSelect>
+      <Navbar className="fresko-navbar" variant="dark" expand="md" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
            <Navbar.Brand>
@@ -66,7 +66,7 @@ const Header = () => {
             </Nav>
           </Navbar.Collapse>
         </Container>
-      </Navbar>
+     </Navbar>
     </header>
   )
 }
