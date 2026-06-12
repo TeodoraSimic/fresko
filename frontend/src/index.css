@@ -1,0 +1,15 @@
+.rating span {
+  margin: 0.1rem;
+  color: #f6b100;
+}
+
+.rating-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding-left: 0.5rem;
+}
+
+.product-title {
+  height: 2.5rem;
+  overflow: hidden;
+}
