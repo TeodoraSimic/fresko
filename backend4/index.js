@@ -1,27 +1,24 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const cors = require('cors');
+import dns from 'node:dns/promises'
+dns.setServers(['1.1.1.1', '1.0.0.1'])
 
-dotenv.config({ path: '../.env' });
-const app = express();
+import express from 'express'
+import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
+dotenv.config()
+import connectDB from './config/db.js'
 
-app.use(cors());
-app.use(express.json());
+const port = process.env.PORT || 5000
 
+connectDB()
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log('POVEZANO');
-  })
-  .catch((err) => {
-    console.log('GRESKA:');
-    console.log(err);
-  });
+const app = express()
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 app.get('/', (req, res) => {
-    res.send('Freshko API radi...');
-});
+  res.send('API radi...')
+})
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server radi na portu ${PORT}`));
+app.listen(port, () => console.log(`Server radi na portu ${port}`))

@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLogoutMutation } from '../slices/usersApiSlice'
 import { logout } from '../slices/authSlice'
-import logo from '../assets/logo.svg'
+import logo from '../assets/logo.png'
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart)
@@ -31,10 +31,10 @@ const Header = () => {
       <Navbar className="fresko-navbar" variant="dark" expand="md" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-           <Navbar.Brand>
-  <img src={logo} alt="FRESHKO" width="34" height="34" className="d-inline-block align-top me-2" />
-  <span className="fw-semibold">FRESHKO</span> — sveže voće i povrće
-</Navbar.Brand>
+            <Navbar.Brand className="d-flex align-items-center">
+              <img src={logo} alt="FRESKO" height="36" className="me-0" />
+              <span><span className="fw-semibold">FRESKO</span> — sveže voće i povrće</span>
+            </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -66,7 +66,7 @@ const Header = () => {
             </Nav>
           </Navbar.Collapse>
         </Container>
-     </Navbar>
+      </Navbar>
     </header>
   )
 }
