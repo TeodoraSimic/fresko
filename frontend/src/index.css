@@ -201,3 +201,30 @@ html { scroll-behavior: smooth; }
 
 /*Footer*/
 footer { margin-top: 3rem; border-top: 1px solid var(--line); color: var(--ink-soft); }
+
+
+/*Auth/forme*/
+.fresko-form-card {
+  background: var(--paper, #f4ecd8);
+  border: 1px solid rgba(75, 93, 50, .18);
+  border-top: 4px solid var(--olive, #4b5d32);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2.5rem auto;
+  box-shadow: 0 18px 40px -24px rgba(43, 33, 23, .45);
+}
+.fresko-auth-head { text-align: center; margin-bottom: 1.4rem; }
+.fresko-auth-emoji { font-size: 2rem; display: block; margin-bottom: .3rem; }
+.fresko-auth-head h1 {
+  font-family: 'Bitter', serif;
+  color: var(--olive, #4b5d32);
+  font-size: 1.85rem;
+  margin-bottom: .15rem;
+}
+.fresko-auth-sub {
+  font-family: 'Caveat', cursive;
+  font-size: 1.35rem;
+  color: var(--clay, #bf5a30);
+}
+.fresko-form-card .form-label { font-weight: 600; color: var(--ink, #2b2117); }
+.fresko-btn-full { width: 100%; }
