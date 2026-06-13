@@ -1,9 +1,12 @@
 import { Row, Col } from 'react-bootstrap'
-import products from '../products_list'
 import Product from '../components/Product'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
+import { useGetProductsQuery } from '../slices/productsApiSlice'
 
 const HomeScreen = () => {
-  const categories = [...new Set(products.map((p) => p.category || 'Ostalo'))]
+  const { data: products, isLoading, error } = useGetProductsQuery()
+const categories = products ? [...new Set(products.map((p) => p.category || 'Ostalo'))] : []
 
   return (
     <>
@@ -30,24 +33,30 @@ const HomeScreen = () => {
       </section>
 
       <div id='ponuda'>
-        <span className='section-eyebrow'>~ sa naše tezge ~</span>
-        <h2 className='section-title'>Današnja ponuda</h2>
+  <span className='section-eyebrow'>~ sa naše tezge ~</span>
+  <h2 className='section-title'>Današnja ponuda</h2>
 
-        {categories.map((cat) => (
-          <section key={cat} className='mb-5'>
-            <h3 className='category-title'>{cat}</h3>
-            <Row>
-              {products
-                .filter((p) => (p.category || 'Ostalo') === cat)
-                .map((product) => (
-                  <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                    <Product product={product} />
-                  </Col>
-                ))}
-            </Row>
-          </section>
-        ))}
-      </div>
+  {isLoading ? (
+    <Loader />
+  ) : error ? (
+    <Message variant='danger'>{error?.data?.message || error.error}</Message>
+  ) : (
+    categories.map((cat) => (
+      <section key={cat} className='mb-5'>
+        <h3 className='category-title'>{cat}</h3>
+        <Row>
+          {products
+            .filter((p) => (p.category || 'Ostalo') === cat)
+            .map((product) => (
+              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                <Product product={product} />
+              </Col>
+            ))}
+        </Row>
+      </section>
+    ))
+  )}
+</div>
     </>
   )
 }
