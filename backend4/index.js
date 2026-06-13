@@ -1,31 +1,37 @@
-import dns from 'node:dns/promises'
-dns.setServers(['1.1.1.1', '1.0.0.1'])
+import express from 'express';
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+import dns from 'dns';
 
-import express from 'express'
-import dotenv from 'dotenv'
-import cookieParser from 'cookie-parser'
-dotenv.config()
-import connectDB from './config/db.js'
-import productRoutes from './routes/productRoutes.js'
-import { notFound, errorHandler } from './middleware/errorHandler.js'
+dns.setServers(['1.1.1.1', '1.0.0.1']);
+dotenv.config();
 
-const port = process.env.PORT || 5000
+import connectDB from './config/db.js';
+import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import { notFound, errorHandler } from './middleware/errorHandler.js';
 
-connectDB()
+const port = process.env.PORT || 5000;
 
-const app = express()
+connectDB();
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(cookieParser())
+const app = express();
+
+// Body parser — da bismo čitali req.body (email, lozinka...)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Cookie parser — da bismo čitali JWT iz kolačića
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
-  res.send('API radi...')
-})
+  res.send('API radi...');
+});
 
-app.use('/api/products', productRoutes)
+app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 
-app.use(notFound)
-app.use(errorHandler)
+app.use(notFound);
+app.use(errorHandler);
 
-app.listen(port, () => console.log(`Server radi na portu ${port}`))
+app.listen(port, () => console.log(`Server radi na portu ${port}`));
