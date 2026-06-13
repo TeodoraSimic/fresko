@@ -49,13 +49,24 @@ const Header = () => {
                   )}
                 </Nav.Link>
               </LinkContainer>
+
               {userInfo ? (
-                <NavDropdown title={userInfo.name} id="username">
-                  <LinkContainer to="/profile">
-                    <NavDropdown.Item>Profil</NavDropdown.Item>
-                  </LinkContainer>
-                  <NavDropdown.Item onClick={logoutHandler}>Odjava</NavDropdown.Item>
-                </NavDropdown>
+                <>
+                  <NavDropdown title={userInfo.name} id="username">
+                    <LinkContainer to="/profile">
+                      <NavDropdown.Item>Profil</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Item onClick={logoutHandler}>Odjava</NavDropdown.Item>
+                  </NavDropdown>
+
+                  {userInfo.isAdmin && (
+                    <NavDropdown title="Admin" id="adminmenu">
+                      <LinkContainer to="/admin/productlist">
+                        <NavDropdown.Item>Proizvodi</NavDropdown.Item>
+                      </LinkContainer>
+                    </NavDropdown>
+                  )}
+                </>
               ) : (
                 <LinkContainer to="/login">
                   <Nav.Link>
